@@ -1,3 +1,5 @@
+
+
 [ PHASE 1: FOUNDATION ]
          │
          ▼
@@ -65,3 +67,50 @@ Analytics flow chart
   │ RETURN: Data Dictionary │    │ RETURN: Data Dictionary │
   │ {cost, retail, profit}  │    │ {gross, net, tax, qty}  │
   └─────────────────────────┘    └─────────────────────────┘
+
+
+
+
+
+  Main.py (user interface)
+
+  The primary rule of Phase 3 is separation of concerns: the interface file should only handle printing strings, collecting keyboard inputs, and calling functions from your backend modules. It should contain no calculations or direct file writing.🗺️ System Control Flow for Phase 3This flowchart maps how the execution loop starts, routes user choices to your Phase 2 modules, and loops indefinitely until a clean exit is triggered.  
+  
+  
+  
+                  ┌─────────────────────────┐
+                  │    START: main.py       │
+                  └────────────┬────────────┘
+                               │
+                               ▼
+                  ┌─────────────────────────┐
+                  │  database.load_all_data │ ◄── Read JSON files into memory 
+                  └────────────┬────────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+             ┌─────►│  CORE TERMINAL LOOP │
+             │      │    (while True)     │
+             │      └──────────┬──────────┘
+             │                 │
+             │                 ▼
+             │      ┌─────────────────────┐
+             │      │  Display Menu &     │
+             │      │  Capture input()    │
+             │      └──────────┬──────────┘
+             │                 │
+             │                 ▼
+             │       Evaluate User Choice (1-6)
+             │                 │
+    [Loop Back]       ┌────────┴────────┬─────────────────┐
+             │        │ (Choice 1-5)    │ (Choice 6)      │ (Invalid)
+             │        ▼                 ▼                 ▼
+             │  ┌───────────┐    ┌─────────────┐   ┌─────────────┐
+             │  │ Call Core │    │ Save Memory │   │ Print Error │
+             │  │ Engine/   │    │ to Disk     │   └──────┬──────┘
+             │  │ Analytics │    └──────┬──────┘          │
+             │  └─────┬─────┘           │                 │
+             │        │                 ▼                 │
+             └────────┴─────────── [EXIT SYSTEM] ◄────────┘
+
+

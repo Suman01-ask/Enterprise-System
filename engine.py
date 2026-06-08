@@ -19,14 +19,14 @@ import os
 
 # lets now build the logic now
 
-def process_transaction(cart):
+def process_transaction(update_inventory,generate_invoice,cart):
     #the first step is to validate the SKU in the cart
     for item in cart:
         sku_item = item['sku']
         quantity = item['quantity']
         if not validate_sku(sku_item):
             return f"Error: SKU {sku_item} is invalid. Transation  rejected."
-        if not check_stock{sku_item}, {qauntity}:
+        if not check_stock(sku_item, quantity):
             return f"Error: Not enouth stock for SKU {sku_item}. Transation rejected."
         
         #If all ites are valaid and in stock, we proceed to calculate the total cost and update the inventory
@@ -64,6 +64,11 @@ def calculate_total(cart):
             if inventoey_item ['sku'] == sku_item :
                 total_cost += inventoey_item['price'] * quantity #pricre will be defined in the inventory data.
     return total_cost
+
+
+
+
+
 
 
         

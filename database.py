@@ -6,6 +6,8 @@ import time
 import config
 
 
+
+
 DAT_DIR = "enterprise_data"
 def load_data():
     with open(os.path.join(DAT_DIR, "data.json"), "r") as data_file:
@@ -21,3 +23,11 @@ def append_log(mesage):
         log_entry = f"[{timestamp}] {mesage}\n"
         enterprise_log.write(log_entry)
 
+def save_data(data):
+    with open(os.path.join(DAT_DIR, "data.json"), "w") as data_file:
+        json.dump(data, data_file, indent = 4)
+
+def load_data():
+    with open(os.path.join(DAT_DIR, "data.json"), "r") as data_file:
+        data = json.load(data_file)
+        return data
