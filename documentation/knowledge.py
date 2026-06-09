@@ -3,7 +3,7 @@
 # Instead of treating code as a single script, we treat it like a business with separate departments. Each file (module) represents a specific department in your company.
 # Here is the exact blueprint of how data flows, how the modules talk to each other, and why this design is "enterprise-grade."
 # ------------------------------
-# ## 🧱 1. The Department Breakdown (The Architecture)
+# ## 1. The Department Breakdown (The Architecture)
 # Imagine your business has four main departments and a manager's office:
 
 # [ main.py ]  <--->  [ engine.py ]  <--->  [ analytics.py ]
@@ -25,7 +25,7 @@
 # * database.py (The Security Vault / Permanent Storage): This handles physical files. When the system boots up, it reads data from your hard drive (.json files) and puts it in the central cabinet (config.py). When you close the app, it locks everything down onto the hard drive so data isn't lost.
 
 # ------------------------------
-# ## 🔄 2. The Lifecycle of a Action (How Data Flows)
+# ## 2. The Lifecycle of a Action (How Data Flows)
 # Let’s trace exactly what happens behind the scenes when a user selects Option 3: Process a Transaction (Checkout).
 # ## Phase A: Verification (The Engine Check)
 

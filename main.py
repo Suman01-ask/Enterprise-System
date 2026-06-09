@@ -236,5 +236,5 @@ if __name__ == "__main__":
     print("--- TEST 2: THE TRIGGER BLOCK WORKS! ---")
 
 
-# Now that we have call main_application() in the __nAME__"== __main__ block, putput should be on terminal when we run the main.py file, and we should see the dashboard with the menu options for the user to interact with.
+# Now that we have call main_application() in the __nAME__"== __main__ block, output should be on terminal when we run the main.py file, and we should see the dashboard with the menu options for the user to interact with.
 # 
