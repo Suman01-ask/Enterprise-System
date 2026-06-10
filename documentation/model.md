@@ -59,5 +59,3 @@ Now that you have a mental image of how these modules operate together, what wou
 
 * We can take our Time Tracker project and modify it to use this precise architecture.
 * We can start writing the core operations logic for this inventory system line-by-line.
-
-Let me know how you would like to proceed!
