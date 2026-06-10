@@ -16,3 +16,4 @@ CURRENT_USER = None
 GLOBAL_INVENTORY = []
 
 
+

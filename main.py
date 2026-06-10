@@ -230,11 +230,24 @@ def display_dashboard():
 
 
 
-print("--- TEST 1: IS PYTHON EVEN ALIVE? ---")
+# print("--- TEST 1: IS PYTHON EVEN ALIVE? ---")
 
-if __name__ == "__main__":
-    print("--- TEST 2: THE TRIGGER BLOCK WORKS! ---")
+# if __name__ == "__main__":
+#     print("--- TEST 2: THE TRIGGER BLOCK WORKS! ---")
 
 
 # Now that we have call main_application() in the __nAME__"== __main__ block, output should be on terminal when we run the main.py file, and we should see the dashboard with the menu options for the user to interact with.
-# 
+
+# We will implement the functions for each menu option in the next steps, and then we will have a fully functional terminal-based inventory management system.
+
+# def main():
+#     display_dashboard()
+
+
+
+# if __name__ == "__main__":
+#     main()
+
+
+if __name__ == "__main__":
+    display_dashboard()

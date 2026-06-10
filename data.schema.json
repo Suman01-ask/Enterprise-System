@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "title": "Enterprise Inventory Data Schema",
+    "type": "object",
+    "required": ["GLOBAL_INVENTORY"],
+    "properties": {
+        "GLOBAL_INVENTORY": {
+            "type": "array",
+            "description": "The live inventory list used by config.GLOBAL_INVENTORY.",
+            "items": {
+                "type": "object",
+                "required": ["sku", "name", "stock", "price"],
+                "properties": {
+                    "sku": {
+                        "type": "string",
+                        "description": "Unique stock keeping unit identifier."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Human-readable item name."
+                    },
+                    "stock": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Current available quantity in stock."
+                    },
+                    "price": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Unit price for the item."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Optional item description."
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Optional category or product family."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Optional storage location or warehouse section."
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "additionalProperties": false
+}
