@@ -1,0 +1,16 @@
+{
+  "GLOBAL_INVENTORY": [
+
+    {
+
+        "sku": "SKU-1004",
+        "name": "macbook pro 16 inch",
+        "stock":10,
+        "price" : 4000.00,
+        "description": "Apples high end laptop with a 16 inch display, M4 silicon chip",
+        "category": "laptop",
+        "location": "warehouse 1 - section A"
+
+    }
+  ]
+}

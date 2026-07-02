@@ -144,6 +144,16 @@ def display_dashboard():
         
 
     
+
+#THIS IS A CURRENT METHOD
+
+
+
+
+
+
+
+
     def handle_checkout():
         cart = []
         while True:
@@ -230,7 +240,7 @@ def display_dashboard():
 
 
 
-# print("--- TEST 1: IS logic EVEN ALIVE? ---")
+# print("--- TEST 1: IS PYTHON EVEN ALIVE? ---")
 
 # if __name__ == "__main__":
 #     print("--- TEST 2: THE TRIGGER BLOCK WORKS! ---")
