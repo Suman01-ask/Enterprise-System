@@ -2,17 +2,14 @@
 # ------------------------------
 # Now that we have the core logic of our engine implemented we can now build the terminal user interface in main.py.
 # This will be a continuous input loop that shows a menu of options to the user, collects theeir input, and calls the appropriate functions in engine.py based on their selections.
-# Below is a simple implementation of the main.py file that provides a terminal-based user interface for our inventory system.
+# Below is a simple implementation of the main.py file that provides a terminal-based`` user interface for our inventory system.
 
 
 import config
 import engine
 import database
-import inventory_baseline
 import analytics
-import json
 import os
-import sys
 # import ast from lambda how to import this ? import ast 
 
 # def main_menu(process_transaction, genrate_financialreport, view_inventory):
@@ -118,98 +115,95 @@ def display_dashboard():
     print(" 6. Terminate Operational System Instance")
     print("=======================================================")
 
-    def view_inventory():
-            print("\nCurrent Inventory:")
-            for item in config.GLOBAL_INVENTORY:
-                print(f"SKU: {item['sku']}, Name: {item['name']}, Stock: {item['stock']}, Price: ${item['price']:.2f}")
-
-
-    def view_stock():
-        print("\nCurrent Inventory:")
-        for item in config.GLOBAL_INVENTORY:
-            print(f"SKU: {item['sku']}, Name: {item['name']}, stock: {item['stock']}, price: ${item['price']:.2f}")
-
-        if not config.GLOBAL_INVENTORY:
-            print("Inventory is currently empty. Please restock items.")
-
-    def handle_add_sku():
-        sku = input("Enter new SKU code: ").strip().upper()
-        name = input("Enter item name: ").strip()
+def handle_add_sku():
+    sku = input("Enter new SKU code: ").strip().upper()
+    name = input("Enter item name: ").strip()
+    try:
+        stock = int(input("Enter initial stock quantity: ").strip())
+        price = float(input("Enter item price: ").strip())
+    except ValueError:
+        print("Invalid input for stock or price. please enter numeric values.")
+        return
+        
+def handle_checkout():
+    cart = []
+    while True:
+        sku = input("Enter SKU of the item to add to cart (or 'done' to finish): ").strip().upper()
+        if sku.lower() == 'done':
+            break
         try:
-            stock = int(input("Enter intial stock quantity: ").strip())
-            price = float(input("Enter item price: ").strip())
+            quantity = int(input("ENter the quantity: ").strip())
         except ValueError:
-            print("Invalid input for stock or price. please enter numeric values.")
-            return
-        
-
-    
-    def handle_checkout():
-        cart = []
-        while True:
-            sku = input("Enter SKU of the item to add to cart (or 'done' to finish): ").strip().upper()
-            if sku.lower() == 'done':
-                break
-            try:
-                quantity = int(input("ENter the quantity: ").strip())
-            except ValueError:
-                print("Invalid input for quantity. Please enter a numeric value.")
-                continue
-            cart.append({'sku': sku})
-            invoice = engine.process_transaction(cart)
-            if isinstance(invoice, str):
-                print(invoice) # This will print the errot mesage if the transation is rejected
-            else:
-                print(f"Transaction successfull! Invoicce ID: {invoice['invoice_id']}, total cost: ${invoice['total_cost']:.2f}")
-
-        
-    def busines_reports():
-        report = analytics.generate_finanacial_report()
-        print("\nFinancial Report:")
-        print(report)
-
-
-    def view_system_logs():
-        log_file_path = os.path.join(database.DAT_DIR, 'system.log')
-        if os.path.exists(log_file_path):
-            with open(log_file_path, 'r') as log_file:
-                logs = log_file.read()
-                print("\nsystem logs")
-                print (logs)
-            
+            print("Invalid input for quantity. Please enter a numeric value.")
+            continue
+        cart.append({
+            "sku": sku,
+            "quantity": quantity
+    })
+        invoice = engine.process_transaction(cart)
+        if isinstance(invoice, str):
+            print(invoice) # This will print the errot mesage if the transation is rejected
         else:
-            print("No system logs found yet")
+            print(f"Transaction successfull! Invoicce ID: {invoice['invoice_id']}, total cost: ${invoice['total_cost']:.2f}")
 
-# here we can integrate the modules to make the complete application baseline, later we can optimize the interface, maybe using flask, django, pygame (mainly for 2d animation, ktinker or streamlit)
-                
-    def main_application():
+def business_reports():
+    report = analytics.generate_financial_report()
+    print("\nFinancial Report:")
+    print(report)
+
+def view_system_logs():
+    log_file_path = os.path.join(database.DAT_DIR, 'system.log')
+    if os.path.exists(log_file_path):
+        with open(log_file_path, 'r') as log_file:
+            logs = log_file.read()
+            print("\nsystem logs")
+            print (logs)
         
-        #load initial data from the database inton the gloibal inventoey
-        config.GLOBAL_INVENTORY = database.load_data()
-        while True:
-            print("\n Welcome to the Inventory Management system!")
-            print("Please select an option:")
-            print("1. View Inventory")
-            print("2. Process a Transaction (checkout)")
-            print("3. Generate financial report")
-            print("4. Exit")
-            choice = input("Select your option: ")
-            if choice == '1':
-                view_inventory()
-            elif choice =='2':
-                engine.process_transaction()
-            elif choice == '3':
-                analytics.generate_finanacial_report()
-            elif choice == '4':
-                print("Exiting the window. Thank you for using the inventory management system!")
-                break
+    else:
+        print("No system logs found yet")
 
-            else:
-                print("Invalid choice. please select a valid option")
-            
-        if __name__ == "__main__":
-            main_application()
+def view_stock():
+    print("\nCurrent Inventory:")
+    for item in config.GLOBAL_INVENTORY:
+        print(
+            f"SKU: {item['sku']}, "
+            f"Name: {item['name']}, "
+            f"Stock: {item['stock']}, "
+            f"Price: ${item['price']:.2f}"
+        )
 
+    if not config.GLOBAL_INVENTORY:
+        print("Inventory is currently empty. Please restock items.")
+
+def main_application():
+    config.GLOBAL_INVENTORY = database.load_data()
+
+    while True:
+        display_dashboard()
+
+        choice = input("Select your option: ").strip()
+
+        if choice == "1":
+            view_stock()
+
+        elif choice == "2":
+            handle_add_sku()
+
+        elif choice == "3":
+            print("Checkout functionality is currently unavailable.")
+
+        elif choice == "4":
+            business_reports()
+
+        elif choice == "5":
+            view_system_logs()
+
+        elif choice == "6":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid option. Please select a number between 1 and 6.")
             
 #after imllementing __name__ = "__main__", and then calling main_application(), there should an output 
             
@@ -250,4 +244,4 @@ def display_dashboard():
 
 
 if __name__ == "__main__":
-    display_dashboard()
+    main_application()
